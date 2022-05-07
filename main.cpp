@@ -41,12 +41,12 @@ struct semaphore {// структура, що уособлює семафор
 };
 
 semaphore *fork = new semaphore[NUMBER_OF_PHILOSOPHERS];//масив "вилок" філософів
-semaphore *correctOutput = new semaphore;// семафор, що забезпечує коректний вивід у консоль
+semaphore *correctOutput = new semaphore();// семафор, що забезпечує коректний вивід у консоль
 
 struct Philosopher {
-    int id;// ідентифікатор філософа, тобто ім'я
+    int id;
     semaphore *leftFork;
-    semaphore *rightFork;//вказівники на вилки
+    semaphore *rightFork;
 
     Philosopher(int id) {
         this->id = id;
@@ -104,7 +104,6 @@ DWORD WINAPI myThread(LPVOID lpParameter) {//функція з якої почи
 int main(int argc, char *argv[]) {
     srand(time(0));
     HANDLE threads[NUMBER_OF_PHILOSOPHERS];
-    DWORD ThreadId[NUMBER_OF_PHILOSOPHERS];
     for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; ++i) {
         Philosopher *philosopher = new Philosopher(i);
         threads[i] = CreateThread(0,
@@ -112,7 +111,7 @@ int main(int argc, char *argv[]) {
                                   myThread,
                                   philosopher,
                                   0,
-                                  &ThreadId[i]);
+                                  NULL);
     }
     Sleep(TIME_OF_WORK);
     isAlive = false;
