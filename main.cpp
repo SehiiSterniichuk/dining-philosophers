@@ -41,7 +41,7 @@ struct semaphore {// структура, що уособлює семафор
 };
 
 semaphore *fork = new semaphore[NUMBER_OF_PHILOSOPHERS];//масив "вилок" філософів
-semaphore *correctOutput = new semaphore;// семафор, що забеспечує коректний вивід у консоль
+semaphore *correctOutput = new semaphore;// семафор, що забезпечує коректний вивід у консоль
 
 struct Philosopher {
     int id;// ідентифікатор філософа, тобто ім'я
