@@ -3,8 +3,8 @@
 
 using namespace std;
 
-#define NUMBER_OF_PHILOSOPHERS 7
-#define TIME_OF_WORK 5000 // час роботи програми
+#define NUMBER_OF_PHILOSOPHERS 4
+#define TIME_OF_WORK 1000 // час роботи програми
 #define MAX_COUNT_OF_SEMAPHORE 1
 #define MIN_EATING_TIME 20
 #define MAX_EATING_TIME 80
@@ -94,7 +94,7 @@ DWORD WINAPI myThread(LPVOID lpParameter) {//функція з якої почи
     return 0;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
     srand(time(0));
     HANDLE threads[NUMBER_OF_PHILOSOPHERS];
     for (int i = 0; i < NUMBER_OF_PHILOSOPHERS; ++i) {
