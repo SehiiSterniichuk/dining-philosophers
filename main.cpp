@@ -3,11 +3,12 @@
 
 using namespace std;
 
-#define NUMBER_OF_PHILOSOPHERS 5
-#define TIME_OF_WORK 1000 // час роботи програми
+#define NUMBER_OF_PHILOSOPHERS 7
+#define TIME_OF_WORK 5000 // час роботи програми
 #define MAX_COUNT_OF_SEMAPHORE 1
 #define MIN_EATING_TIME 20
 #define MAX_EATING_TIME 80
+#define THINK_TIME 100
 
 bool isAlive = true; //прапор роботи програми. true == працює програма, false == кінець роботи
 
@@ -71,16 +72,8 @@ struct Philosopher {
                 }
                 leftFork->increment();
             }
-            think();
+            Sleep(THINK_TIME);
         }
-    }
-
-    void think() {
-        while (correctOutput->tryDecrement() != WAIT_OBJECT_0);// цикл очікування
-        // поки консоль не стане доступною для цього потоку
-        cout << "Philosopher: " << id << " is thinking " << endl;
-        correctOutput->increment();// передача консолі для іншого потоку
-        Sleep(((rand() % (MAX_EATING_TIME - MIN_EATING_TIME + 1)) + MIN_EATING_TIME) / 2);
     }
 
     void eat() {
